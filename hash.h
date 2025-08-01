@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//-------linklist class-----//
+//-------Node class-----//
 template <typename v, typename k>
 class Node
 {

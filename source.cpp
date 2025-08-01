@@ -1,5 +1,5 @@
 
-//--------linkist constructore--------//
+//--------Node constructore--------//
 template <typename v, typename k>
 Node<v, k>::Node(v ke, k value)
 {
