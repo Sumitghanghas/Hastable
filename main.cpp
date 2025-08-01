@@ -19,13 +19,13 @@ int main()
 
         Hash<string, string> h(2);
 
-    h.insert("ac", "One");
-    h.insert("cc", "Eleven");
-    h.insert("bcc", "Two");
-    h.insert("icc", "Twelve");
-    h.insert("t20", "Twenty-One");
+    h.insert("c", "One");
+    h.insert("c", "Eleven");
+    h.insert("c", "Two");
+    h.insert("c", "Twelve");
+    h.insert("0", "Twenty-One");
     h.display();
-       int r =  h.search("t20", "Tdd");
+       int r =  h.search("0", "Tdd");
     if(r){
         cout<<"the node is exist"<<endl;
     }

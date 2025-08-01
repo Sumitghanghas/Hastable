@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+//-------linklist class-----//
 template <typename v, typename k>
 class Node
 {
@@ -12,6 +13,7 @@ public:
     Node(v ke, k value);
 };
 
+//-------HashaTable class-----//
 template <typename v, typename k>
 class Hash
 {

@@ -1,3 +1,5 @@
+
+//--------linkist constructore--------//
 template <typename v, typename k>
 Node<v, k>::Node(v ke, k value)
 {
@@ -6,6 +8,7 @@ Node<v, k>::Node(v ke, k value)
     next = nullptr;
 }
 
+//--------HashTable constructore--------//
 template <typename v, typename k>
 Hash<v, k>::Hash(int s)
 {
@@ -17,6 +20,7 @@ Hash<v, k>::Hash(int s)
     }
 }
 
+//--------Insert the value--------//
 template <typename v, typename k>
 void Hash<v, k>::insert(v key, k value)
 {
@@ -27,6 +31,7 @@ void Hash<v, k>::insert(v key, k value)
     table[index] = newNode;
 }
 
+//--------Remove the value--------//
 template <typename v, typename k>
 void Hash<v, k>::remove(v key, k value)
 {
@@ -57,6 +62,7 @@ void Hash<v, k>::remove(v key, k value)
     delete temp;
 }
 
+//--------Search the value--------//
 template <typename v, typename k>
 int Hash<v, k>::search(v key,k value){
     int index = hashFunction(key);
@@ -71,6 +77,7 @@ int Hash<v, k>::search(v key,k value){
     }
 }
 
+//--------Display the table--------//
 template <typename v, typename k>
 void Hash<v, k>::display()
 {
@@ -87,6 +94,7 @@ void Hash<v, k>::display()
     }
 }
 
+//--------HashTable deconstructore--------//
 template <typename v, typename k>
 Hash<v, k>::~Hash()
 {
