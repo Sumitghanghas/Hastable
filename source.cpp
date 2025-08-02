@@ -24,11 +24,18 @@ Hash<v, k>::Hash(int s)
 template <typename v, typename k>
 void Hash<v, k>::insert(v key, k value)
 {
+    if ((capacity * 100) / size >= thrashold)
+    {
+        resize();
+    }
+
     int index = hashFunction(key);
     Node<v, k> *newNode = new Node<v, k>(key, value);
 
     newNode->next = table[index];
     table[index] = newNode;
+
+    capacity++;
 }
 
 //--------Remove the value--------//
@@ -60,19 +67,25 @@ void Hash<v, k>::remove(v key, k value)
     }
 
     delete temp;
+        capacity--;
 }
 
 //--------Search the value--------//
 template <typename v, typename k>
-int Hash<v, k>::search(v key,k value){
+int Hash<v, k>::search(v key, k value)
+{
     int index = hashFunction(key);
-        Node<v, k> *temp = table[index];
-    while(temp != nullptr && temp->data != value){
+    Node<v, k> *temp = table[index];
+    while (temp != nullptr && temp->data != value)
+    {
         temp = temp->next;
     }
-     if (temp != nullptr && temp->data == value) {
+    if (temp != nullptr && temp->data == value)
+    {
         return 1;
-    } else {
+    }
+    else
+    {
         return 0;
     }
 }
@@ -110,4 +123,98 @@ Hash<v, k>::~Hash()
         }
     }
     delete[] table;
+}
+
+//------resize -------//
+template <typename v, typename k>
+void Hash<v, k>::resize()
+{
+    int oldSize = size;
+    size *= 2;
+    Node<v, k> **oldTable = table;
+    table = new Node<v, k> *[size];
+
+    for (int i = 0; i < size; ++i){
+        table[i] = nullptr;
+    }
+    capacity = 0;
+
+    for (int i = 0; i < oldSize; i++)
+    {
+        Node<v, k> *current = oldTable[i];
+        while (current)
+        {
+            insert(current->key, current->data);
+            Node<v, k> *Delete = current;
+            current = current->next;
+            delete Delete;
+        }
+    }
+
+    delete[] oldTable;
+}
+//------copy constucture------//
+template <typename v, typename k>
+Hash<v, k>::Hash(const Hash<v, k> &other)
+{
+    size = other.size;
+    capacity = other.capacity;
+    thrashold = other.thrashold;
+
+    table = new Node<v, k> *[size];
+    for (int i = 0; i < size; i++)
+    {
+        table[i] = nullptr;
+        Node<v, k> *otherCurrent = other.table[i];
+        Node<v, k> **Current = &table[i];
+
+        while (otherCurrent)
+        {
+            *Current = new Node<v, k>(otherCurrent->key, otherCurrent->data);
+            Current = &((*Current)->next);
+            otherCurrent = otherCurrent->next;
+        }
+    }
+}
+
+//------- operator overload------//
+template <typename v, typename k>
+Hash<v, k> &Hash<v, k>::operator=(const Hash<v, k> &other)
+{
+    if (this == &other){
+        return *this;
+    }
+
+    for (int i = 0; i < size; ++i)
+    {
+        Node<v, k> *current = table[i];
+        while (current)
+        {
+            Node<v, k> *temp = current;
+            current = current->next;
+            delete temp;
+        }
+    }
+    delete[] table;
+
+    size = other.size;
+    capacity = other.capacity;
+    thrashold = other.thrashold;
+
+    table = new Node<v, k> *[size];
+    for (int i = 0; i < size; i++)
+    {
+        table[i] = nullptr;
+        Node<v, k> *otherCurrent = other.table[i];
+        Node<v, k> **Current = &table[i];
+
+        while (otherCurrent)
+        {
+            *Current = new Node<v, k>(otherCurrent->key, otherCurrent->data);
+            Current = &((*Current)->next);
+            otherCurrent = otherCurrent->next;
+        }
+    }
+
+    return *this;
 }

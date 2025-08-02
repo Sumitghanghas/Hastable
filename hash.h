@@ -19,7 +19,11 @@ class Hash
 {
 private:
     int size;
+    int thrashold = 75;
+    int capacity;
     Node<v, k> **table;
+
+    void resize();
 
     int hashFunction(int key)
     {
@@ -38,6 +42,8 @@ private:
 
 public:
     Hash(int s);
+    Hash(const Hash<v, k> &other);
+    Hash<v, k> &operator=(const Hash<v, k> &other);
     void insert(v key, k value);
     void remove(v key, k value);
     void display();

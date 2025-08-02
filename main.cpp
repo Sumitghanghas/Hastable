@@ -4,38 +4,21 @@ using namespace std;
 
 int main()
 {
-    // Hash<int, string> h(10);
+    Hash<int, string> m(4);
+    m.insert(1, "apple");
+    m.insert(2, "banana");
+    m.insert(3, "cherry");
+        // m.insert(33, "cherry");
 
-    // h.insert(1, "One");
-    // h.insert(11, "Eleven");
-    // h.insert(2, "Two");
-    // h.insert(12, "Twelve");
-    // h.insert(21, "Twenty-One");
-    // h.display();
+    m.display();
 
-    // h.remove(21, "Twenty-One");
+    Hash<int, string> m2 = m; 
+    m2.insert(5, "date");
+        m2.insert(33, "cherry");
 
-    // h.display();
+    m2.display();
 
-        Hash<string, string> h(2);
-
-    h.insert("c", "One");
-    h.insert("c", "Eleven");
-    h.insert("c", "Two");
-    h.insert("c", "Twelve");
-    h.insert("0", "Twenty-One");
-    h.display();
-       int r =  h.search("0", "Tdd");
-    if(r){
-        cout<<"the node is exist"<<endl;
-    }
-    else{
-                cout<<"the node is not exist"<<endl;
-
-    }
-    h.remove("icc", "Twelve");
-
-    h.display();
-
-    return 0;
+    Hash<int, string> m3(2);
+    m3 = m; 
+    m3.display();
 }
