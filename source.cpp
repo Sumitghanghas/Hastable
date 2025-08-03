@@ -1,5 +1,4 @@
-
-//--------Node constructore--------//
+//--------Node constructor--------//
 template <typename v, typename k>
 Node<v, k>::Node(v ke, k value)
 {
@@ -8,11 +7,12 @@ Node<v, k>::Node(v ke, k value)
     next = nullptr;
 }
 
-//--------HashTable constructore--------//
+//--------HashTable constructor--------//
 template <typename v, typename k>
 Hash<v, k>::Hash(int s)
 {
     size = s;
+    capacity = 0; 
     table = new Node<v, k> *[size];
     for (int i = 0; i < size; i++)
     {
@@ -67,7 +67,7 @@ void Hash<v, k>::remove(v key, k value)
     }
 
     delete temp;
-        capacity--;
+    capacity--;
 }
 
 //--------Search the value--------//
@@ -80,7 +80,7 @@ int Hash<v, k>::search(v key, k value)
     {
         temp = temp->next;
     }
-    if (temp != nullptr && temp->data == value)
+     if (temp != nullptr && temp->data == value)
     {
         return 1;
     }
@@ -107,7 +107,7 @@ void Hash<v, k>::display()
     }
 }
 
-//--------HashTable deconstructore--------//
+//--------HashTable Destructor--------//
 template <typename v, typename k>
 Hash<v, k>::~Hash()
 {
@@ -125,7 +125,7 @@ Hash<v, k>::~Hash()
     delete[] table;
 }
 
-//------resize -------//
+//------Resize function------//
 template <typename v, typename k>
 void Hash<v, k>::resize()
 {
@@ -134,9 +134,11 @@ void Hash<v, k>::resize()
     Node<v, k> **oldTable = table;
     table = new Node<v, k> *[size];
 
-    for (int i = 0; i < size; ++i){
+    for (int i = 0; i < size; i++)
+    {
         table[i] = nullptr;
     }
+
     capacity = 0;
 
     for (int i = 0; i < oldSize; i++)
@@ -144,7 +146,7 @@ void Hash<v, k>::resize()
         Node<v, k> *current = oldTable[i];
         while (current)
         {
-            insert(current->key, current->data);
+                      insert(current->key, current->data);
             Node<v, k> *Delete = current;
             current = current->next;
             delete Delete;
@@ -153,7 +155,7 @@ void Hash<v, k>::resize()
 
     delete[] oldTable;
 }
-//------copy constucture------//
+//------copy Constructor------//
 template <typename v, typename k>
 Hash<v, k>::Hash(const Hash<v, k> &other)
 {
@@ -166,12 +168,12 @@ Hash<v, k>::Hash(const Hash<v, k> &other)
     {
         table[i] = nullptr;
         Node<v, k> *otherCurrent = other.table[i];
-        Node<v, k> **Current = &table[i];
+        Node<v, k> **current = &table[i];
 
         while (otherCurrent)
         {
-            *Current = new Node<v, k>(otherCurrent->key, otherCurrent->data);
-            Current = &((*Current)->next);
+            *current = new Node<v, k>(otherCurrent->key, otherCurrent->data);
+            current = &((*current)->next);
             otherCurrent = otherCurrent->next;
         }
     }

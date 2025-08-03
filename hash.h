@@ -13,7 +13,7 @@ public:
     Node(v ke, k value);
 };
 
-//-------HashaTable class-----//
+//-------HashTable class-----//
 template <typename v, typename k>
 class Hash
 {
@@ -50,4 +50,5 @@ public:
     int search(v key, k value);
     ~Hash();
 };
+
 #include "source.cpp"
